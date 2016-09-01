@@ -1,0 +1,33 @@
+Sales Order # Customer PO # Due Date
+650 427 5000
+12257234 SPP-6679 19-OCT-15
+Fax #           650 644 0376
+ar@vmware.com
+Billing Period Page Federal Tax Id #
+20-AUG-2015 to 19-SEP-2015 1 of 1 94-3292913
+ Remit To: By Check
+Attn:enroll5, ENROLL5 VMware, Inc.
+27575 Network Place
+Chicago, IL 60673-1275
+CAIRO ALEXANDER IL 62914
+United States
+ Remit To: By Bank Wire
+Ship To : VMware, Inc.
+Swift Code: CHASUS33
+enroll5, ENROLL5
+ABA Routing #: 021000021
+VMware Account #: 581940181
+CAIRO ALEXANDER IL 62914 Bank Name & Address: JPMorgan Chase Bank, N.A.
+270 Park Ave, New York, NY 10017, USA
+United States 
+Billing Statement
+Location Entitlement Account
+266442979 377459347             
+Part Number Description           Date Qty Unit Price
+M74932 HSR-A1ACR- VMware vCloud Air Disaster 20-AUG-15 to 19-SEP- 1 795.00
+01MT0-C2S Recovery - A1A - Core Subscription - 15
+1 month
+   Sub Total :
+                  SPP Credit applied :
+USD
+    Total :

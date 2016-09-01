@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="415046" started-at="2016-09-01T10:09:49Z" finished-at="2016-09-01T10:16:44Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="415046" started-at="2016-09-01T10:09:49Z" finished-at="2016-09-01T10:16:44Z">
+      <class name="com.pricingtestcasessprint01.CustomerCreation01">
+        <test-method status="PASS" signature="oneTimeSetup(java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.pricingtestcasessprint01.CustomerCreation01@19f379]" name="oneTimeSetup" is-config="true" duration-ms="9868" started-at="2016-09-01T15:39:49Z" finished-at="2016-09-01T15:39:59Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Pricing]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Windows 7||chrome]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- oneTimeSetup -->
+        <test-method status="PASS" signature="customerCreation()[pri:0, instance:com.pricingtestcasessprint01.CustomerCreation01@19f379]" name="customerCreation" duration-ms="401660" started-at="2016-09-01T15:39:59Z" finished-at="2016-09-01T15:46:40Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- customerCreation -->
+        <test-method status="PASS" signature="oneTearDown()[pri:0, instance:com.pricingtestcasessprint01.CustomerCreation01@19f379]" name="oneTearDown" is-config="true" duration-ms="3499" started-at="2016-09-01T15:46:40Z" finished-at="2016-09-01T15:46:44Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- oneTearDown -->
+      </class> <!-- com.pricingtestcasessprint01.CustomerCreation01 -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
