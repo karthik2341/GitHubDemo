@@ -13,7 +13,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 public class Driver {
 	public static WebDriver driver=null;
 	//
-	 public  WebDriver startSelenium(Properties p,String browser) throws IOException{
+	 public  WebDriver startSelenium(String verification,Properties p,String browser) throws IOException{
 		 String value =p.getProperty("value");		 
 		 String callerClassName = new Exception().getStackTrace()[1].getClassName();
 		 String arr[] = callerClassName.split("\\.");	
@@ -21,17 +21,19 @@ public class Driver {
 		 
 		 if(browser.equalsIgnoreCase("chrome")){
 			 try{
-			 System.setProperty("webdriver.chrome.driver", "C:\\Users\\kartheek_challa\\eclipse_workspace\\Pricing\\Resources\\chromedriver.exe");
+				 
+			System.out.println(System.getProperty("user.dir"));
+			 System.setProperty("webdriver.chrome.driver", "C:\\Users\\lchalla\\eclipse_workspace\\Pricing\\Resources\\chromedriver.exe");
 			 driver = new ChromeDriver();			 
 			 driver.get(value);			
 			 HTMLReport hm = new HTMLReport();			
-			 hm.writeToHTMWithScreenShot("Expected URL is " +value,"Actual URL is " + value,"Pass",arr[1]);
+			 hm.writeToHTMWithScreenShot(verification,"Expected URL is " +value,"Actual URL is " + value,"Pass",arr[1]);
 			 //hm.writeToHTML("Expected URL is " +value,"Actual URL is " + value,"Pass");
 			 driver.manage().window().maximize();	
 			 }
 			 catch(Exception e){
 				 HTMLReport hm = new HTMLReport();
-				 hm.writeToHTML("Expected URL is " +value,"Actual URL is " + value,"Fail");
+				 hm.writeToHTML(verification,"Expected URL is " +value,"Actual URL is " + value,"Fail");
 			 }
 		 }
 		 else if(browser.equalsIgnoreCase("firefox")){
@@ -42,7 +44,7 @@ public class Driver {
 		 else if(browser.equalsIgnoreCase("internet explorer")){
 			// DesiredCapabilities cap = new DesiredCapabilities();
 			 //cap.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);			 
-			 System.setProperty("webdriver.ie.driver", "C:\\Users\\kartheek_challa\\eclipse_workspace\\Pricing\\Resources\\IEDriverServer.exe");
+			 System.setProperty("webdriver.ie.driver", System.getProperty("user.dir"+ "\\Resources\\IEDriverServer.exe"));
 			 driver = new InternetExplorerDriver();
 			 driver.get(value);
 			 driver.manage().window().maximize();			 

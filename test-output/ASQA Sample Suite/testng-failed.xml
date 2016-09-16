@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [ASQA Sample Suite]">
+  <test name="ASQA Sample Test(failed)">
+    <classes>
+      <class name="com.pricingtestcasessprint01.CustomerCreation01">
+        <methods>
+          <include name="customerCreation"/>
+        </methods>
+      </class> <!-- com.pricingtestcasessprint01.CustomerCreation01 -->
+    </classes>
+  </test> <!-- ASQA Sample Test(failed) -->
+</suite> <!-- Failed suite [ASQA Sample Suite] -->

@@ -23,7 +23,7 @@ public class WebControls extends Driver {
 	HTMLReport hm = new HTMLReport();	
 	
 	
-	public void webActions(String operation,String locType,String locValue,String eleName,String valToEnter,String valToSelect) throws Exception{
+	public void webActions(String verification,String operation,String locType,String locValue,String eleName,String valToEnter,String valToSelect) throws Exception{
 		String callerClassName = new Exception().getStackTrace()[1].getClassName();
 		String arr[] = callerClassName.split("\\.");			
 		switch(operation.toUpperCase()){
@@ -32,10 +32,10 @@ public class WebControls extends Driver {
 			try{			
 			driver.findElement(this.getObject(locType, locValue)).click();
 			//hm.writeToHTMWithScreenShotWithFailure("Button/link/Image "+eleName+" has to be clicked.", "Unable to click on Button/link/Image" + eleName , "Fail",arr[1]);
-			hm.writeToHTML("Button/link/Image '"+eleName+" 'has to be clicked.", "Clicked on Button/link/Image '" + eleName + "'", "Pass");
+			hm.writeToHTML(verification,"Button/link/Image '"+eleName+" 'has to be clicked.", "Clicked on Button/link/Image '" + eleName + "'", "Pass");
 			}
 			catch(Exception e){
-		    hm.writeToHTMWithScreenShotWithFailure("Button/link/Image "+eleName+" has to be clicked.", "Unable to click on Button/link/Image" + eleName , "Fail",arr[1]);
+		    hm.writeToHTMWithScreenShotWithFailure(verification,"Button/link/Image "+eleName+" has to be clicked.", "Unable to click on Button/link/Image" + eleName , "Fail",arr[1]);
 			//hm.writeToHTMWithScreenShot("Button/link/Image "+eleName+" has to be clicked.", "Unable to click on Button/link/Image" + eleName , "Fail",arr[1]);				
 			}
 			break;
@@ -47,14 +47,14 @@ public class WebControls extends Driver {
 			driver.findElement(this.getObject(locType, locValue)).sendKeys(valToEnter);
 			String getValue = driver.findElement(this.getObject(locType, locValue)).getAttribute("value");
 			if(getValue.equalsIgnoreCase(valToEnter)){
-			hm.writeToHTML("Text "+valToEnter+" has to be entered", "Text Entered is " + getValue , "Pass");			
+			hm.writeToHTML(verification,"Text "+valToEnter+" has to be entered", "Text Entered is " + getValue , "Pass");			
 			}
 			else{
-			hm.writeToHTMWithScreenShotWithFailure("Text "+valToEnter+" has to be entered", "Text was not entered", "Fail",arr[1]);
+			hm.writeToHTMWithScreenShotWithFailure(verification,"Text "+valToEnter+" has to be entered", "Text was not entered", "Fail",arr[1]);
 			}
 			}
 			catch(Exception e){
-			hm.writeToHTMWithScreenShotWithFailure("Text "+valToEnter+" has to be entered", "Text was not entered", "Fail",arr[1]);
+			hm.writeToHTMWithScreenShotWithFailure(verification,"Text "+valToEnter+" has to be entered", "Text was not entered", "Fail",arr[1]);
 			//hm.writeToHTMWithScreenShot("Text "+valToEnter+" has to be entered", "Text was not entered", "Fail",arr[1]);				
 			}
 		    break;
@@ -67,10 +67,10 @@ public class WebControls extends Driver {
 			try{
 				Select drpDown = new Select(driver.findElement(this.getObject(locType,locValue)));
 				drpDown.selectByVisibleText(valToSelect);
-				hm.writeToHTML("Selected Value "+ "'" +valToSelect+ "'" +" has to be selected", "Selected Value is " + "'" +valToSelect+ "'","Pass");
+				hm.writeToHTML(verification,"Selected Value "+ "'" +valToSelect+ "'" +" has to be selected", "Selected Value is " + "'" +valToSelect+ "'","Pass");
 			}
 		   catch(Exception e){
-			   hm.writeToHTMWithScreenShotWithFailure("Selected Value "+ "'" +valToSelect+ "'" +" has to be selected", "Was Not able to select the given value","Fail",arr[1]);
+			   hm.writeToHTMWithScreenShotWithFailure(verification,"Selected Value "+ "'" +valToSelect+ "'" +" has to be selected", "Was Not able to select the given value","Fail",arr[1]);
 		   }
 		break;
 		}
@@ -78,7 +78,7 @@ public class WebControls extends Driver {
 		
 	}
 	
-	public void findElementUsingIndexOfFrame(String operation,String locType,String locValue,String valToEnter,String eleName) throws Exception{
+	public void findElementUsingIndexOfFrame(String verification,String operation,String locType,String locValue,String valToEnter,String eleName) throws Exception{
 		String callerClassName = new Exception().getStackTrace()[1].getClassName();
 		String arr[] = callerClassName.split("\\.");	
 		int size = driver.findElements(By.tagName("iframe")).size();
@@ -89,11 +89,11 @@ public class WebControls extends Driver {
 			if(total==1 && operation.equalsIgnoreCase("CLICK")){
 				try{
 				driver.findElement(this.getObject(locType,locValue)).click();
-				hm.writeToHTML("Button/link/Image '"+eleName+" 'has to be clicked.", "Clicked on Button/link/Image '" + eleName + "'", "Pass");
+				hm.writeToHTML(verification,"Button/link/Image '"+eleName+" 'has to be clicked.", "Clicked on Button/link/Image '" + eleName + "'", "Pass");
 				break;
 			}
 				catch(Exception e){
-					hm.writeToHTMWithScreenShotWithFailure("Button/link/Image '"+eleName+" 'has to be clicked.", "Unable to click on the button/link/Image", "Fail",arr[1]);
+					hm.writeToHTMWithScreenShotWithFailure(verification,"Button/link/Image '"+eleName+" 'has to be clicked.", "Unable to click on the button/link/Image", "Fail",arr[1]);
 					break;
 				}
 			}
@@ -103,12 +103,12 @@ public class WebControls extends Driver {
 					driver.findElement(this.getObject(locType,locValue)).sendKeys(valToEnter);
 					String getValue = driver.findElement(this.getObject(locType, locValue)).getAttribute("value");
 					if(getValue.equalsIgnoreCase(valToEnter)){
-					hm.writeToHTML("Text "+valToEnter+" has to be entered", "Text Entered is " + getValue , "Pass");
+					hm.writeToHTML(verification,"Text "+valToEnter+" has to be entered", "Text Entered is " + getValue , "Pass");
 					break;
 					}
 				}
 				catch(Exception e){
-					hm.writeToHTMWithScreenShotWithFailure("Text "+valToEnter+" has to be entered", "Text was not entered", "Fail",arr[1]);
+					hm.writeToHTMWithScreenShotWithFailure(verification,"Text "+valToEnter+" has to be entered", "Text was not entered", "Fail",arr[1]);
 					break;
 				}
 			
@@ -117,7 +117,7 @@ public class WebControls extends Driver {
 		    
 	}
 	
-	public void clickWebTableBasedOnUniqueCellText(String locType,String locValue,String expText,String operation,String eleName,String valToEnter,String valToSelect) throws Exception{
+	public void clickWebTableBasedOnUniqueCellText(String verification,String locType,String locValue,String expText,String operation,String eleName,String valToEnter,String valToSelect) throws Exception{
 		
 		WebElement myTable = driver.findElement(this.getObject(locType, locValue));
 		List<WebElement> rows_table = myTable.findElements(By.tagName("tr"));
@@ -131,7 +131,7 @@ public class WebControls extends Driver {
 				    if(expText.equals(actCeltext)){
 				    	try{
 				    		locValue = locValue + "/tr[" + row + "]" + "/td[" + column + "]";
-				    		webActions(operation,locType,locValue,eleName,valToEnter,valToSelect);
+				    		webActions(verification,operation,locType,locValue,eleName,valToEnter,valToSelect);
 				    	   
 				    	}
 				    	catch(Exception e){
@@ -146,7 +146,7 @@ public class WebControls extends Driver {
 	}
 	//Verifying title of page
 	
-	public void verifyHomePageTitle(String locType,String locValue,String titType,String titValue,String expText) throws Exception{
+	public void verifyHomePageTitle(String verification,String locType,String locValue,String titType,String titValue,String expText) throws Exception{
 		String callerClassName = new Exception().getStackTrace()[1].getClassName();
 		String arr[] = callerClassName.split("\\.");
 		WebDriverWait myWaitVar = new WebDriverWait(driver,10);
@@ -154,10 +154,10 @@ public class WebControls extends Driver {
 			myWaitVar.until(ExpectedConditions.visibilityOfElementLocated(this.getObject(locType, locValue)));
 			String title = driver.findElement(this.getObject(titType, titValue)).getText().trim();
 			if(title.contains(expText)){
-				hm.writeToHTML(expText,title,"Pass");
+				hm.writeToHTML(verification,expText,title,"Pass");
 			}
 				else{
-				 hm.writeToHTMWithScreenShot(expText, title,"Fail",arr[1]);
+				 hm.writeToHTMWithScreenShot(verification,expText, title,"Fail",arr[1]);
 				}
 			
 		}
@@ -166,16 +166,16 @@ public class WebControls extends Driver {
 		}
 		
 	}
-	public String returnTextFromElement(String locType,String locValue) throws Exception{
+	public String returnTextFromElement(String verification,String locType,String locValue) throws Exception{
 		String getText="";
 		String callerClassName = new Exception().getStackTrace()[1].getClassName();
 		String arr[] = callerClassName.split("\\.");
 		getText = driver.findElement(this.getObject(locType, locValue)).getText();
 		if(getText!=""){
-			hm.writeToHTML("Expected Text Should Not be Empty","Actual Text is " + getText, "Pass");			
+			hm.writeToHTML(verification,"Expected Text Should Not be Empty","Actual Text is " + getText, "Pass");			
 		}
 		else{
-			hm.writeToHTMWithScreenShotWithFailure("Expected Text Should Not be Empty", "Expected Text is empty","Fail",arr[1]);
+			hm.writeToHTMWithScreenShotWithFailure(verification,"Expected Text Should Not be Empty", "Expected Text is empty","Fail",arr[1]);
 		}
 		
 		
@@ -183,7 +183,7 @@ public class WebControls extends Driver {
 	}
 	
 	
-	public String returnTextFromValueAttribute(String locType,String locValue,String expectedText) throws Exception{
+	public String returnTextFromValueAttribute(String verification,String locType,String locValue,String expectedText) throws Exception{
 		String getText="";
 		String callerClassName = new Exception().getStackTrace()[1].getClassName();
 		String arr[] = callerClassName.split("\\.");	
@@ -191,15 +191,15 @@ public class WebControls extends Driver {
 		
 		getText = driver.findElement(this.getObject(locType, locValue)).getAttribute("value").toString();
 		if(getText!=""){
-			hm.writeToHTML(expectedText, expectedText + " is " + getText, "Pass");			
+			hm.writeToHTML(verification,expectedText, expectedText + " is " + getText, "Pass");			
 		}
 		else{
-			hm.writeToHTMWithScreenShotWithFailure(expectedText, expectedText +" Not Found","Fail",arr[1]);
+			hm.writeToHTMWithScreenShotWithFailure(verification,expectedText, expectedText +" Not Found","Fail",arr[1]);
 		}
 		
 		}
 		catch(Exception e){
-			hm.writeToHTMWithScreenShotWithFailure(expectedText, expectedText +" Not Found","Fail",arr[1]);
+			hm.writeToHTMWithScreenShotWithFailure(verification,expectedText, expectedText +" Not Found","Fail",arr[1]);
 			
 		}
 		return getText;

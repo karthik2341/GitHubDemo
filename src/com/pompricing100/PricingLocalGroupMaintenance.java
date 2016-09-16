@@ -26,38 +26,38 @@ public class PricingLocalGroupMaintenance  {
 	
 	
 	public void addDataForLocalGroups(String groupID,String grpDesc,String userID,String crprtCntrlFlg) throws Exception{
-		wc.webActions("SETTEXT", "XPATH", LOCALPRICE_GROUPID_TXTBOX_XPATH, "Group ID", groupID, "");
-		wc.webActions("SETTEXT", "XPATH", LOCALPRICE_GROUPDESC_TXTBOX_XPATH, "Group Description", grpDesc, "");
-		wc.webActions("SETTEXT", "XPATH", LOCALPRICE_USERID_TXTBOX_XPATH, "User ID", userID, "");
-		wc.webActions("SETTEXT", "XPATH", LOCALPRICE_CONTROLFLAG_TXTBOX_XPATH, "Corporate Control Flag", crprtCntrlFlg, "");				
+		wc.webActions("Enter the Value in Group ID Field","SETTEXT", "XPATH", LOCALPRICE_GROUPID_TXTBOX_XPATH, "Group ID", groupID, "");
+		wc.webActions("Enter the Value in Group Description","SETTEXT", "XPATH", LOCALPRICE_GROUPDESC_TXTBOX_XPATH, "Group Description", grpDesc, "");
+		wc.webActions("Enter the value in User ID Field","SETTEXT", "XPATH", LOCALPRICE_USERID_TXTBOX_XPATH, "User ID", userID, "");
+		wc.webActions("Enter the Value in Corporate Control Flag","SETTEXT", "XPATH", LOCALPRICE_CONTROLFLAG_TXTBOX_XPATH, "Corporate Control Flag", crprtCntrlFlg, "");				
 		wc.setTimeOut(5);
-		wc.webActions("click", "XPATH", LOCALPRICE_SAVE_BTN_XPATH, "Save", "", "");			
+		wc.webActions("Click on Save Button","click", "XPATH", LOCALPRICE_SAVE_BTN_XPATH, "Save", "", "");			
 		wc.setTimeOut(5);
-		wc.webActions("click", "XPATH", LOCALPRICE_CANCEL_BTN_XPATH, "Cancel", "", "");				
+		wc.webActions("Click on Cancel Button","click", "XPATH", LOCALPRICE_CANCEL_BTN_XPATH, "Cancel", "", "");				
 		wc.setTimeOut(5);
 	}
 	
 	public void getLPGID(String groupID) throws Exception{
-		wc.webActions("settext", "xpath", LOCALPRICE_GROUPID_TEXT_BTN_XPATH, "Group ID", groupID, "");				
+		wc.webActions("Enter the Value in Group ID","settext", "xpath", LOCALPRICE_GROUPID_TEXT_BTN_XPATH, "Group ID", groupID, "");				
 		wc.setTimeOut(2);
-		wc.webActions("enter", "xpath", LOCALPRICE_GROUPID_TEXT_BTN_XPATH, "Group ID","", "");				
+		wc.webActions("Press Enter in Group ID field","enter", "xpath", LOCALPRICE_GROUPID_TEXT_BTN_XPATH, "Group ID","", "");				
 		wc.setTimeOut(5);
-		String LPGID = wc.returnTextFromElement("xpath", "//*[@id='G0_1_R0']/td[2]");
-		er.setCellData(System.getProperty("user.dir") + "\\TestData\\MasterSpreadSheet.xls", "Global", "cLPGID", 1, LPGID);
-		wc.webActions("click", "xpath", LOCALPRICE_CUSTOMERS_BTN_XPATH, "Customers", "", "");				
+		String LPGID = wc.returnTextFromElement("Get the LPG ID","xpath", "//*[@id='G0_1_R0']/td[2]");
+		er.setCellData(System.getProperty("user.dir") + "\\TestData\\MasterSpreadSheet.xls", "Global", "cLPGID", 2, LPGID);
+		wc.webActions("Click on Customers Button","click", "xpath", LOCALPRICE_CUSTOMERS_BTN_XPATH, "Customers", "", "");				
 		wc.setTimeOut(3);				
 	}
 	
 	public void addPriceRuleGrup(String custNumber,String termDate) throws Exception{
 		wc.setTimeOut(5);
-		wc.webActions("click","xpath", LOCALPRICE_ADD_BTN_XPATH, "Add", "", "");				
+		wc.webActions("Click on Add Button","click","xpath", LOCALPRICE_ADD_BTN_XPATH, "Add", "", "");				
 		wc.setTimeOut(5);
-		wc.webActions("settext","xpath", LOCALPRICE_CUSTOMER_NBR_TXTBOX_XPATH, "Customer Number", custNumber, "");
-		wc.webActions("settext","xpath", LOCALPRICE_TERMINATION_DATE_TXTBOX_XPATH, "Termination Date", termDate, "");				
+		wc.webActions("Enter Customer in the Customer Number Field","settext","xpath", LOCALPRICE_CUSTOMER_NBR_TXTBOX_XPATH, "Customer Number", custNumber, "");
+		wc.webActions("Enter the Termination Date","settext","xpath", LOCALPRICE_TERMINATION_DATE_TXTBOX_XPATH, "Termination Date", termDate, "");				
 		wc.setTimeOut(3);
-		wc.webActions("click","xpath", LOCALPRICE_SAVE_BTN_XPATH, "Save", "", "");				
+		wc.webActions("Click on Save Button","click","xpath", LOCALPRICE_SAVE_BTN_XPATH, "Save", "", "");				
 		wc.setTimeOut(5);
-		wc.webActions("click","xpath", LOCALPRICE_CANCEL_BTN_XPATH, "Cancel", "", "");				
+		wc.webActions("Click on Cancel Button","click","xpath", LOCALPRICE_CANCEL_BTN_XPATH, "Cancel", "", "");				
 		wc.setTimeOut(5);		
 	}
 	

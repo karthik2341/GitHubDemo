@@ -14,9 +14,9 @@ public class PricingLoginPage {
 		WebControls wc = new WebControls();
 		String key = "lockUnlock";
 		String decodedPwd = StringEncrypt.decryptXOR("DR8RAjlfWQ==", key);
-		wc.webActions("settext","xpath",LP_USERNAME_TB_XPATH,"User ID","e1tst01","");
-		wc.webActions("settext","xpath",LP_PASSWORD_TB_XPATH,"Password",decodedPwd,"");
-		wc.webActions("click","css",LP_SIGNIN_BTN_CSS,"Sign In","","");	
+		wc.webActions("Enter 'UserID' in the 'UserID' Field","settext","xpath",LP_USERNAME_TB_XPATH,"User ID","e1tst01","");
+		wc.webActions("Enter 'Password' in the 'Password' Field","settext","xpath",LP_PASSWORD_TB_XPATH,"Password",decodedPwd,"");
+		wc.webActions("Click 'Sign In' Button","click","css",LP_SIGNIN_BTN_CSS,"Sign In","","");	
 		
 	}
 	

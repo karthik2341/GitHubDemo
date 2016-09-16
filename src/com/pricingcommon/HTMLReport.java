@@ -24,7 +24,9 @@ import org.testng.annotations.Test;
 public class HTMLReport extends Driver{
     //public static WebDriver driver;
     public static StringBuilder htmlStringBuilder=new StringBuilder();
+    public static int repFlag = 0;
     public static StringBuilder htmlSummaryStringBuilder = new StringBuilder();
+    public static String autoPath="C:\\Users\\lchalla\\eclipse_workspace\\";
     public static int iStepCount=1;    
     public static int iScreenShotCount =1;
     public static String startTime;
@@ -32,6 +34,7 @@ public class HTMLReport extends Driver{
     public static int flag = 0;
     public static String summaryfileName;
     public static String testCsName;
+    public static int setFlag = 0;
     public String projectName,testEnv,browser,testCaseName,UserName,date,automationPath;
     public HTMLReport(){
     	
@@ -63,10 +66,11 @@ public class HTMLReport extends Driver{
 		htmlStringBuilder.append("<tr><td class=\"tableBorder\"><table cellpadding=\"0\" cellspacing=\"0\" style=\"border-color: Black; overflow: visible\" border=\"0\" width=\"98%\"><tr><td width=\"15%\" class=\"envDetCaption\">Project</td><td width=\"5%\" class=\"envDetColon\">:</td><td style=\"color:orange\" colspan=\"4\" class=\"envDetValue\">"+projectName+"</td></tr><tr>");
 		htmlStringBuilder.append("<tr><td width=\"15%\" class=\"envDetCaption\">Environment</td><td width=\"5%\" class=\"envDetColon\">:</td><td width=\"40%\" class=\"envDetValue\">"+testEnv+"</td><td width=\"10%\" class=\"envDetCaption\">User</td><td width=\"5%\" class=\"envDetColon\">:</td><td width=\"25%\" class=\"envDetValue\">"+UserName+"</td></tr><tr>");
 		startTime = date;
+		String status = "Pass";
 		htmlStringBuilder.append("<tr><td width=\"15%\" class=\"envDetCaption\">TestCaseName</td><td width=\"5%\" class=\"envDetColon\">:</td><td width=\"40%\" class=\"envDetValue\">"+testCaseName+"</td><td width=\"10%\" class=\"envDetCaption\">Date</td><td width=\"5%\" class=\"envDetColon\">:</td><td width=\"25%\" class=\"envDetValue\">"+date+" </td></tr>");
-		htmlStringBuilder.append("<tr><td width=\"15%\" class=\"envDetCaption\">browser</td><td width=\"5%\" class=\"envDetColon\">:</td><td width=\"40%\" class=\"envDetValue\">"+browser+"</td><td width=\"10%\" class=\"envDetCaption\">Result</td><td width=\"5%\" class=\"envDetColon\">:</td><td style=\"color:#008000; font-weight:bold\" width=\"25%\" class=\"envDetValue\">Pass</td></tr></table></td></tr></table>");
+		htmlStringBuilder.append("<tr><td width=\"15%\" class=\"envDetCaption\">browser</td><td width=\"5%\" class=\"envDetColon\">:</td><td width=\"40%\" class=\"envDetValue\">chrome</td><td width=\"10%\" class=\"envDetCaption\">Result</td><td width=\"5%\" class=\"envDetColon\">:</td><td style=\"color:#008000; font-weight:bold\" width=\"25%\" class=\"envDetValue\">"+status+"</td></tr></table>");
 		htmlStringBuilder.append("<table cellpadding=\"0\" cellspacing=\"0\" width=\"100%\"><tr><td><table cellpadding=\"0\" cellspacing=\"0\" width=\"100%\"><tr><td class=\"tableHeader\">Test Summary</td></tr><tr>");
-		htmlStringBuilder.append("<td class=\"tableBorder\"><table cellpadding=\"0\" cellspacing=\"0\" style=\"border-color: Black; overflow: visible\" border=\"0\" width=\"99%\"><tr><td width=\"2%\" class=\"table_hl\">SNo.</td><td width=\"36%\" class=\"table_hl\">Expected</td><td width=\"36%\" class=\"table_hl\">Actual</td><td width=\"26%\" class=\"table_hl\">Status</td></tr><tr>");
+		htmlStringBuilder.append("<td class=\"tableBorder\"><table cellpadding=\"0\" cellspacing=\"0\" style=\"border-color: Black; overflow: visible\" border=\"0\" width=\"99%\"><tr><td width=\"2%\" class=\"table_hl\">SNo.</td><td width=\"36%\" class=\"table_hl\">Description</td><td width=\"36%\" class=\"table_hl\">Expected</td><td width=\"36%\" class=\"table_hl\">Actual</td><td width=\"26%\" class=\"table_hl\">Status</td></tr><tr>");
         
 		//htmlStringBuilder.append("<tr><td width=\"2%\" class=\"table_cell\">1.</td><td width=\"36%\" class=\"table_cell\">Launching main page</td><td width=\"36%\" class=\"table_cell\">Successfully launched main page: http://mmse1py.mckesson.com/jde/E1Menu.maf in  chrome browser </td><td style=\"color: green; font-weight: bold\" width=\"9%\" class=\"table_cell\">Pass</td><td width=\"17%\" class=\"table_cell\">2016.08.05  at 01:53:34 </td></tr>");
 		//WriteToFile(htmlStringBuilder.toString(),System.getenv("Automation_Path")+"\\Pricing\\Reports\\testfile.html");
@@ -77,7 +81,10 @@ public class HTMLReport extends Driver{
 		System.out.println(e);
 	}
 	}
-	
+	public void writeStepInformation(String textToBeWritten) throws Exception{
+		 htmlStringBuilder.append("<tr><td colspan=\"5\"style=\"color:black;text-align: left;font-weight: bold\" width=\"100%\" bgcolor=\"#D9D9FF\" class=\"table_cell\"><i>"+textToBeWritten+"</i></td><td style=\"color: green; font-weight: bold\" width=\"28%\" bgcolor=\"#E6E6FA\" ></td><td style=\"color: green; font-weight: bold\" width=\"28%\" bgcolor=\"#E6E6FA\" ></td><td style=\"color: green; font-weight: bold\" width=\"28%\" bgcolor=\"#E6E6FA\" ></td></tr>");
+		
+	}
 	public void writeSummaryReport(String tcName) throws Exception{
 		testCsName=tcName;
 		String summaryFilePath = this.buildSummaryFolderStructure();
@@ -135,32 +142,25 @@ public class HTMLReport extends Driver{
     
 			
 	}
-	public void writeToHTML(String expText,String actualText,String status) throws IOException{
-		Calendar cal = Calendar.getInstance(); 	     
-	    SimpleDateFormat formatter1 = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss"); 	    
-	    String date = formatter1.format(cal.getTime());	
-	    String replaceDate = date.replace(" ", " at ");		    
-	    htmlStringBuilder.append("<tr><td width=\"2%\" class=\"table_cell\">"+iStepCount+"</td><td width=\"46%\" class=\"table_cell\">"+expText+"</td><td width=\"46%\" class=\"table_cell\">"+actualText+"</td><td style=\"color: green; font-weight: bold\" width=\"6%\" class=\"table_cell\">"+status+"</td></tr>");
-	    
-
-		iStepCount = iStepCount +1;				
+	public void writeToHTML(String verification,String expText,String actualText,String status) throws IOException{		
+		if (setFlag==0){
+	    htmlStringBuilder.append("<tr><td width=\"2%\" class=\"table_cell\">"+iStepCount+"</td><td width=\"32%\" class=\"table_cell\">"+verification+"</td><td width=\"32%\" class=\"table_cell\">"+expText+"</td><td width=\"32%\" class=\"table_cell\">"+actualText+"</td><td style=\"color: green; font-weight: bold\" width=\"6%\" class=\"table_cell\">"+status+"</td></tr>");	    
+		iStepCount = iStepCount +1;	
+		}
 	}
 	
-	public void writeToHTMWithScreenShot(String expText,String actualText,String status,String tcName) throws Exception{
+	public void writeToHTMWithScreenShot(String verification,String expText,String actualText,String status,String tcName) throws Exception{
 		
 		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		Calendar cal = Calendar.getInstance(); 	     
 	    SimpleDateFormat formatter1 = new SimpleDateFormat("dd-MMM-yyyy HH-mm-ss"); 	    
 	    String date = formatter1.format(cal.getTime());	 
-	    SimpleDateFormat formatter2 = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss"); 
-	    String date2 = formatter2.format(cal.getTime());	
-	    String repDate = date2.replace(" ", " at ");
-	    String[] time = date.split(" ");
-	    String filePath = System.getenv("Automation_Path")+ "\\Pricing\\Reports\\"+ time[0] + "\\ScreenShots\\"+ time[0] + "\\" +time[1] + "\\";
+	   	String[] time = date.split(" ");
+	    String filePath = autoPath + "\\Pricing\\Reports\\"+ time[0] + "\\ScreenShots\\"+ time[0] + "\\" +time[1] + "\\";
 	    File files =  new File(filePath);
 	    if(!files.exists()){
 	    	if(files.mkdirs()){
-	    		System.out.println("Directories are created successfully");
+	    		
 	    	}
 	    	else{
 	    		System.out.println("Directories are not created successfully");
@@ -171,21 +171,21 @@ public class HTMLReport extends Driver{
         iScreenShotCount = iScreenShotCount+1;
         System.out.println(fileName);        
         FileUtils.copyFile(scrFile, new File(fileName));
-		htmlStringBuilder.append("<tr><td width=\"2%\" class=\"table_cell\">"+iStepCount + "." + "</td><td width=\"36%\" class=\"table_cell\">"+expText+"</td><td width=\"36%\" class=\"table_cell\">"+actualText+"<br><a target=\"_blank\" href="+fileName+">"+fileName+"</a></td><td style=\"color: red; font-weight: bold\" width=\"26%\" class=\"table_cell\">"+status+"</td></tr><tr>");
+		htmlStringBuilder.append("<tr><td width=\"2%\" class=\"table_cell\">"+iStepCount + "." + "</td><td width=\"32%\" class=\"table_cell\">"+verification+"</td><td width=\"30%\" class=\"table_cell\">"+expText+"</td><td width=\"30%\" class=\"table_cell\">"+actualText+"<br><a target=\"_blank\" href="+fileName+">"+fileName+"</a></td><td style=\"color: green; font-weight: bold\" width=\"26%\" class=\"table_cell\">"+status+"</td></tr><tr>");
 		iStepCount = iStepCount +1;
 	}
 	
-	public void writeToHTMWithScreenShotWithFailure(String expText,String actualText,String status,String tcName) throws Exception{		
+	public void writeToHTMWithScreenShotWithFailure(String verification,String expText,String actualText,String status,String tcName) throws Exception{		
 		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);		
 		Calendar cal = Calendar.getInstance(); 	     
 	    SimpleDateFormat formatter1 = new SimpleDateFormat("dd-MMM-yyyy HH-mm-ss"); 	    
 	    String date = formatter1.format(cal.getTime());	 
 	    String[] time = date.split(" ");
-	    String filePath = System.getenv("Automation_Path")+ "\\Pricing\\Reports\\"+ time[0] + "\\ScreenShots\\"+ time[0] + "\\" +time[1] + "\\";
+	    String filePath = autoPath + "\\Pricing\\Reports\\"+ time[0] + "\\ScreenShots\\"+ time[0] + "\\" +time[1] + "\\";
 	    File files =  new File(filePath);
 	    if(!files.exists()){
 	    	if(files.mkdirs()){
-	    		System.out.println("Directories are created successfully");
+	    		//System.out.println("Directories are created successfully");
 	    	}
 	    	else{
 	    		System.out.println("Directories are not created successfully");
@@ -197,14 +197,17 @@ public class HTMLReport extends Driver{
         FileUtils.copyFile(scrFile, new File(fileName));  
         /*
         int index1 = htmlStringBuilder.indexOf("<tr><td width=\"15%\" class=\"envDetCaption\">browser");
-        int index2 = htmlStringBuilder.indexOf("/td></tr></table></td></tr></table>");
+        int index2 = htmlStringBuilder.indexOf("/td></tr></table>");
         //String s = htmlStringBuilder.substring(2468,2816);
         //System.out.println(s);
         System.out.println(index1);
-        System.out.println(index2);        
-        */
-        htmlStringBuilder.replace(2468,2816,"<tr><td width=\"15%\" class=\"envDetCaption\">browser</td><td width=\"5%\" class=\"envDetColon\">:</td><td width=\"40%\" class=\"envDetValue\">chrome</td><td width=\"10%\" class=\"envDetCaption\">Result</td><td width=\"5%\" class=\"envDetColon\">:</td><td style=\"color:#FF0000; font-weight:bold\" width=\"25%\" class=\"envDetValue\">"+status+"</td></tr></table></td></tr></table>");
-		htmlStringBuilder.append("<tr><td width=\"2%\" class=\"table_cell\">"+iStepCount + "." + "</td><td width=\"36%\" class=\"table_cell\">"+expText+"</td><td width=\"36%\" class=\"table_cell\">"+actualText+"<br><a target=\"_blank\" href="+fileName+">"+fileName+"</a></td><td style=\"color:Red; font-weight: bold\" width=\"26%\" class=\"table_cell\">"+status+"</td></tr><tr>");
+        System.out.println(index2); 
+        */       
+        if(repFlag == 0){
+        htmlStringBuilder.replace(2455,2785,"<tr><td width=\"15%\" class=\"envDetCaption\">browser</td><td width=\"5%\" class=\"envDetColon\">:</td><td width=\"40%\" class=\"envDetValue\">chrome</td><td width=\"10%\" class=\"envDetCaption\">Result</td><td width=\"5%\" class=\"envDetColon\">:</td><td style=\"color:#FF0000; font-weight:bold\" width=\"25%\" class=\"envDetValue\">"+status+"</td></tr></table>");
+        repFlag = 1;
+        }
+		htmlStringBuilder.append("<tr><td width=\"2%\" class=\"table_cell\">"+iStepCount + "." + "</td><td width=\"36%\" class=\"table_cell\">"+verification+"</td><td width=\"36%\" class=\"table_cell\">"+expText+"</td><td width=\"36%\" class=\"table_cell\">"+actualText+"<br><a target=\"_blank\" href="+fileName+">"+fileName+"</a></td><td style=\"color:Red; font-weight: bold\" width=\"26%\" class=\"table_cell\">"+status+"</td></tr><tr>");
 		//writeFailureStatusInSummaryReport();		
 		iStepCount = iStepCount +1;
 	}
@@ -249,7 +252,7 @@ public class HTMLReport extends Driver{
 			}
 			String timeTaken = diffHrs + ":" + diffMin + ":" + diffSec;
 			String timeCust = endTime.replace(" "," at ");
-			htmlStringBuilder.append("<tr><td width=\"2%\" class=\"table_cell\">"+iStepCount + "." + "</td><td width=\"36%\" class=\"table_cell\">Execution Time:(HH:MM:SS)</td><td width=\"36%\" class=\"table_cell\">Time Taken for Execution is "+ timeTaken +"</td><td style=\"color: green; font-weight: bold\" width=\"26%\" class=\"table_cell\">Pass</td></tr>");
+			htmlStringBuilder.append("<tr><td width=\"2%\" class=\"table_cell\">"+iStepCount + "." + "</td><td width=\"32%\" class=\"table_cell\">Execution Time should be displayed</td><td width=\"30%\" class=\"table_cell\">Execution Time:(HH:MM:SS)</td><td width=\"30%\" class=\"table_cell\">Time Taken for Execution is "+ timeTaken +"</td><td style=\"color: green; font-weight: bold\" width=\"26%\" class=\"table_cell\">Pass</td></tr>");
 		    iStepCount = iStepCount + 1;
 
 			
@@ -270,11 +273,11 @@ public class HTMLReport extends Driver{
 	    String date = formatter1.format(cal.getTime());	 
 	    String[] time = date.split(" ");
 	    //String filePath = System.getenv("Automation_Path")+ "\\Pricing\\Reports\\"+ time[0] + "\\" +time[1];
-	    String filePath = System.getenv("Automation_Path")+ "\\Pricing\\Reports\\"+ time[0];
+	    String filePath = autoPath + "\\Pricing\\Reports\\"+ time[0];
 	    File files =  new File(filePath);
 	    if(!files.exists()){
 	    	if(files.mkdirs()){
-	    		System.out.println("Directories are created successfully");
+	    		//System.out.println("Directories are created successfully");
 	    	}
 	    	else{
 	    		System.out.println("Directories are not created successfully");
@@ -291,11 +294,11 @@ public class HTMLReport extends Driver{
 	    String date = formatter1.format(cal.getTime());	 
 	    String[] time = date.split(" ");
 	    //String filePath = System.getenv("Automation_Path")+ "\\Pricing\\Reports\\"+ time[0] + "\\" +time[1];
-	    String filePath = System.getenv("Automation_Path")+ "\\Pricing\\Reports\\" + time[0];
+	    String filePath = autoPath + "\\Pricing\\Reports\\" + time[0];
 	    File files =  new File(filePath);
 	    if(!files.exists()){
 	    	if(files.mkdirs()){
-	    		System.out.println("Directories are created successfully");
+	    		//System.out.println("Directories are created successfully");
 	    	}
 	    	else{
 	    		System.out.println("Directories are not created successfully");
